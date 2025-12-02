@@ -71,13 +71,13 @@ export const purchaseCourse = async (req, res) => {
           product_data: {
             name: courseData.courseTitle,
           },
-          unit_amount: Math.floor(newPurchase.amount) * 100,
+          unit_amount: Math.floor(newPurchase.amount) * 100
         },
         quantity: 1,
       }
     ]
 
-    // ✅ Use backticks for template literals
+    // Use backticks for template literals
     const session = await stripeInstance.checkout.sessions.create({
       success_url: `${origin}/loading/my-enrollments`,
       cancel_url: `${origin}/`,
