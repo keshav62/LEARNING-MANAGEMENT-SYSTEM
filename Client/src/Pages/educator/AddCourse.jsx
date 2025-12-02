@@ -1,13 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import uniqid from  'uniqid' ; 
 import Quill from 'quill' ; 
 import { assertContextExists } from '@clerk/shared/react/index';
 import { assets } from '../../assets/assets';
+import { AppContext } from '../../context/AppContext';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 function AddCourse() {
 
   const quillRef = useRef(null) ; 
   const editorRef = useRef(null); 
+
+  const { backendUrl , getToken } = useContext(AppContext) ; 
 
   const [courseTitle , setCourseTitle] = useState(''); 
   const [coursePrice , setCoursePrice ] = useState(0);
@@ -87,7 +92,44 @@ function AddCourse() {
   }
 
   const handleSubmit = async (e) => { 
-    e.preventDefault() ; 
+    try {
+      e.preventDefault() ; 
+      if(!image){
+        toast.error("Thumbnail not Selected."); 
+      }
+
+      const courseData = {
+        courseTitle , 
+        courseDescription : quillRef.current.root.innerHTML , 
+        coursePrice : Number(coursePrice) , 
+        discount : Number(discount) ,
+        isPublished : false ,  
+        courseContent : chapters   
+      }
+      
+      const formData = new FormData(); 
+      formData.append('courseData', JSON.stringify(courseData)) ; 
+      formData.append('image' , image); 
+
+      const token = await getToken(); 
+      const {data} = await axios.post(backendUrl + '/api/educator/add-course' , formData , {headers : {Authorization : `Bearer ${token}`}}) ; 
+
+      if(data.success){
+        toast.success(data.message) ; 
+        setCourseTitle(''); 
+        setCoursePrice(0); 
+        setDiscount(0) ; 
+        setImage(null); 
+        setChapters([]); 
+        quillRef.current.root.innerHTML =  "";
+      }
+      else{
+        toast.error(data.message); 
+      }
+
+    } catch (error) {
+      toast.error(error.message); 
+    }
   }
 
 
@@ -95,9 +137,9 @@ function AddCourse() {
     if(!quillRef.current && editorRef.current){
       quillRef.current = new Quill(editorRef.current , {
         theme : 'snow' , 
-      }) ; 
+      }); 
     }
-  } , []) ; 
+  } , []); 
 
   return (
     <div className='h-screen overflow-scroll flex flex-col items-start justify-between md:p-8 md:pb-0 p-4 pt-8 pb-0 '>
@@ -196,7 +238,7 @@ function AddCourse() {
                     <p>Is preview free?</p>
                     <input type="checkbox" 
                     checked={lectureDetails.isPreviewFree} 
-                    onChange={(e)=> setLectureDetails({...lectureDetails , isPreviewFree : e.target.value})}
+                    onChange={(e)=> setLectureDetails({...lectureDetails , isPreviewFree : e.target.checked})}
                     className='mt-1 block w-full border rounded py-1 px-2'/>
                   </div>
 
