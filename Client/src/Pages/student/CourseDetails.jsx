@@ -21,7 +21,7 @@ function CourseDetails() {
   const fetchCourseData = async ()=>{
      try {
       const {data} = await axios.get(backendUrl + '/api/course/' + id ) ; 
-
+       console.log(getToken); 
       if(data.success){
         setCourseData(data.courseData) ; 
 
