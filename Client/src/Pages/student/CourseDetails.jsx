@@ -5,7 +5,7 @@ import Loading from '../../Components/student/Loading';
 import { assets } from '../../assets/assets';
 import humanizeDuration from 'humanize-duration';
 import Footer from '../../Components/student/Footer';
-import Youtube from 'react-youtube'
+import YouTube from 'react-youtube'
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
@@ -161,7 +161,7 @@ function CourseDetails() {
       <div className='max-w-[500px] z-10 shadow-[0px_4px_15px_2px_rgba(0,0,0,0.1)] rounded-t md:rounded-none overflow-hidden bg-white min-w-[300px] sm:min-w-[420px] '>
         {
           playerData ?
-           <Youtube videoId={playerData.videoId} opts={{playerVars : {autoplay : 1}}} 
+           <YouTube videoId={playerData.videoId} opts={{playerVars : {autoplay : 1}}} 
            iframeClassName='w-full aspect-video'/> 
           :
           <img src={courseData.courseThumbnail} alt="" />

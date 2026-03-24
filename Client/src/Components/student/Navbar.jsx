@@ -17,6 +17,9 @@ const Navbar = () => {
 
   const becomeEducator = async ()=> {
     try {
+      console.log("isEducator value:", isEducator);
+    console.log("type:", typeof isEducator);
+
       if(isEducator){
         navigate('/educator') ; 
         return ; 

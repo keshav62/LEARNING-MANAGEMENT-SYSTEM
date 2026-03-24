@@ -3,14 +3,13 @@ import { assets , dummyEducatorData } from '../../assets/assets'
 import {UserButton , useUser } from '@clerk/clerk-react'
 import { Link } from 'react-router-dom'
 
-function Navbar() {
-  const educatorData = dummyEducatorData ; 
+function Navbar() { 
   const {user} = useUser() ; 
 
 
   return (
     <div className='flex items-center justify-between px-4 md:px-8 border-b border-gray-500 py-3 '>
-      <Link>
+      <Link to='/'>
         <img src={assets.logo} alt="logo" className='w-28 lg:w-32' />
         <img src="" alt="" />
       </Link>

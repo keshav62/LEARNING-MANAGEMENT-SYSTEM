@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import humanizeDuration from 'humanize-duration';
 
 import { createContext } from "react"; 
-import { dummyCourses } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 import {useAuth , useUser} from '@clerk/clerk-react'
 import axios from "axios";
@@ -22,7 +21,7 @@ export const AppContextProvider = (props)=>{
   const {user} = useUser() ; 
 
   const [allCourses , setAllCourses] = useState([]); 
-  const [isEducator , setIsEducator] = useState(true); 
+  const [isEducator , setIsEducator] = useState(false); 
   const [enrolledCourse , setEnrolledCourse] = useState([]); 
   const [userData , setUserData] = useState(null); 
 
