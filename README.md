@@ -195,7 +195,7 @@ userRouter.post('/add-rating', addUserRating);
 ## Clone Repository
 
 ``` bash
-git clone https://github.com/yourusername/lms-platform.git
+git clone https://github.com/yourusername/lms-platform.git](https://github.com/keshav62/LEARNING-MANAGEMENT-SYSTEM.git
 ```
 
 ## Install Dependencies
