@@ -58,6 +58,10 @@ MongoDB Database
         ├── Clerk Authentication
         ├── Stripe Payments
         └── Cloudinary Media Storage
+
+
+
+        
 📂 Project Structure
 LMS-Platform
 │
@@ -75,7 +79,10 @@ LMS-Platform
 │   └── config
 │
 ├── package.json
-└── README.md
+
+
+
+
 📡 API Endpoints
 👨‍🏫 Educator Routes
 Method	Endpoint	Description
